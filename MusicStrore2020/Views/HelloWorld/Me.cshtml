@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Hello Edge Tech";
+}
+
+<h1>@ViewBag.Name is a Programmer</h1>
+<h6>@ViewBag.Title</h6>
+
+@foreach (var item in ViewBag.List)
+{
+    <p>@item is @item.Length of characters long</p>
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">@ViewBag.Title</h1>
+    <p>@ViewBag.Name is @ViewData["Age"] years old</p>
+    <p>@ViewBag.Date</p>
+</div>
