@@ -1,33 +1,36 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusicStrore2020.Data;
 using MusicStrore2020.Models;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 
 namespace MusicStrore2020.Controllers
 {
-    public class SongsController : Controller
+    public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public SongsController(ApplicationDbContext context, IWebHostEnvironment env)
+        public CustomersController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
         }
 
-        // GET: Songs
+        // GET: Customers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Songs.ToListAsync());
+            return View(await _context.Customers.ToListAsync());
         }
 
-        // GET: Songs/Details/5
+        // GET: Customers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,49 +38,50 @@ namespace MusicStrore2020.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Songs.FirstOrDefaultAsync(m => m.Id == id);
-            if (song == null)
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(song);
+            return View(customer);
         }
 
-        // GET: Songs/Create
+        // GET: Customers/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Songs/Create
+        // POST: Customers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Artist,Album,ReleaseDate,Genre,ImagePath,Price")] Song song,
+        public async Task<IActionResult> Create([Bind("Id,Name,Age,FavoriteGenre,FavoriteSong,ImagePath")] Customer customer,
                         IFormFile file)
         {
             if (file != null)
             {
                 var fileName = Path.GetFileName(file.FileName);
-                var path = _env.WebRootPath + "\\uploads\\albums\\" + fileName;
+                var path = _env.WebRootPath + "\\uploads\\customers\\" + fileName;
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
-                song.ImagePath = "uploads/albums/" + fileName;
+                customer.ImagePath = "uploads/customers/" + fileName;
             }
             if (ModelState.IsValid)
             {
-                _context.Add(song);
+                _context.Add(customer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(song);
+            return View(customer);
         }
 
-        // GET: Songs/Edit/5
+        // GET: Customers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -85,33 +89,33 @@ namespace MusicStrore2020.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Songs.FindAsync(id);
-            if (song == null)
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
             {
                 return NotFound();
             }
-            return View(song);
+            return View(customer);
         }
 
-        // POST: Songs/Edit/5
+        // POST: Customers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Artist,Album,ReleaseDate,Genre,ImagePath,Price")] Song song,
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Age,FavoriteGenre,FavoriteSong,ImagePath")] Customer customer,
                         IFormFile file)
         {
             if (file != null)
             {
                 var fileName = Path.GetFileName(file.FileName);
-                var path = _env.WebRootPath + "\\uploads\\albums\\" + fileName;
+                var path = _env.WebRootPath + "\\uploads\\customers\\" + fileName;
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
                 }
-                song.ImagePath = "uploads/albums/" + fileName;
+                customer.ImagePath = "uploads/customers/" + fileName;
             }
-            if (id != song.Id)
+            if (id != customer.Id)
             {
                 return NotFound();
             }
@@ -120,12 +124,12 @@ namespace MusicStrore2020.Controllers
             {
                 try
                 {
-                    _context.Update(song);
+                    _context.Update(customer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SongExists(song.Id))
+                    if (!CustomerExists(customer.Id))
                     {
                         return NotFound();
                     }
@@ -136,10 +140,10 @@ namespace MusicStrore2020.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(song);
+            return View(customer);
         }
 
-        // GET: Songs/Delete/5
+        // GET: Customers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,29 +151,30 @@ namespace MusicStrore2020.Controllers
                 return NotFound();
             }
 
-            var song = await _context.Songs.FirstOrDefaultAsync(m => m.Id == id);
-            if (song == null)
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return View(song);
+            return View(customer);
         }
 
-        // POST: Songs/Delete/5
+        // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var song = await _context.Songs.FindAsync(id);
-            _context.Songs.Remove(song);
+            var customer = await _context.Customers.FindAsync(id);
+            _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SongExists(int id)
+        private bool CustomerExists(int id)
         {
-            return _context.Songs.Any(e => e.Id == id);
+            return _context.Customers.Any(e => e.Id == id);
         }
     }
 }

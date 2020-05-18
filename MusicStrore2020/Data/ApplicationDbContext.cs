@@ -15,5 +15,6 @@ namespace MusicStrore2020.Data
         }
         public DbSet<MusicStrore2020.Models.Movie> Movies { get; set; }
         public DbSet<MusicStrore2020.Models.Song> Songs { get; set; }
+        public DbSet<MusicStrore2020.Models.Customer> Customers { get; set; }
     }
 }
