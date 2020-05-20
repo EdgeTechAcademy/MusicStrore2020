@@ -4,34 +4,37 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MusicStrore2020</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+@*    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
+
+    @* These three links were added to get the carousel working *@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-inverse navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MusicStrore2020</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                    <ul class="nav navbar-nav flex-grow-1">
+                        <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
+                        <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="HelloWorld" asp-action="Me">This is Me!</a>
                         </li>
-                        <li class="nav-item">
+                        <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Songs" asp-action="Index">Songs</a>
                         </li>
-                        <li class="nav-item">
+                        <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Albums">Albums</a></li>
+                        <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a>
                         </li>
                     </ul>

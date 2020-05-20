@@ -22,5 +22,12 @@ namespace MusicStrore2020.Models
         public string ImagePath { get; set; }
         [Display(Name = "Cost")] 
         public decimal Price { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsFeatured { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Title} by {Artist} on {Album}";
+        }
     }
 }
