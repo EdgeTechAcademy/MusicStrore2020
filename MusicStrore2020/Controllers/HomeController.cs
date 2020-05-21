@@ -28,19 +28,8 @@ namespace MusicStrore2020.Controllers
 
         public IActionResult Albums()
         {
-            var grpBy = _context.Songs.GroupBy(m => m.Album).Select(s => s.FirstOrDefault());
-            var groups = _context.Songs.GroupBy(p => p.Album);
-            foreach (var group in groups)
-            {
-                //group.Key is the CategoryId value
-                foreach (var song in group)
-                {
-                    // you can access individual product properties
-                }
-            }
-            //            var select = grpBy.Select(grp => grp.First());
-            //var list = select.ToList();
-            return View(_context.Songs.Where(m => m.IsFeatured).ToList());
+            var albums = _context.Songs.ToList().GroupBy(g => g.Album).Select(s => s.FirstOrDefault());
+            return View(albums);
         }
 
         public string Hello()
