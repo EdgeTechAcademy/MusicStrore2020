@@ -32,6 +32,28 @@ namespace MusicStrore2020.Controllers
             return View(albums);
         }
 
+        public IActionResult Recommendations(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = _context.Customers.SingleOrDefault(m => m.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            List<Song> allSongs = _context.Songs.ToList();
+            //  how would you only return songs with a high ranking
+            List<Song> songs = allSongs.FindAll(s => s.Genre == customer.FavoriteGenre);
+            ViewBag.Customer = customer;
+            ViewBag.Me = "This is my name - Edge Tech Academy";
+            ViewBag.time = new DateTime();
+            return View(songs);
+        }
+
         public string Hello()
         {
             return "...Edge Tech has you...";

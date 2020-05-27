@@ -229,6 +229,9 @@ namespace MusicStrore2020.Data.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FavoriteGenre")
                         .HasColumnType("nvarchar(max)");
 

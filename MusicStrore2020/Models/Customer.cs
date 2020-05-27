@@ -20,7 +20,11 @@ namespace MusicStrore2020.Models
 
         [Display(Name = "Favortie Song")]
         public string FavoriteSong { get; set; }
-        
+
+        [Display(Name = "Customer Email")]
+        [DataType(DataType.EmailAddress)]
+        public string EmailAddress { get; set; }
+
         public string ImagePath { get; set; }
     }
 }

@@ -10,6 +10,10 @@ namespace MusicStrore2020.Controllers
     {
         public IActionResult Index()
         {
+            Random rnd = new Random();
+            ViewBag.Age = (int)rnd.Next(100000);
+            ViewBag.Name = "Edge Tech Academy";
+            ViewBag.Date = DateTime.Now;
             return View();
         }
         public IActionResult Me()
