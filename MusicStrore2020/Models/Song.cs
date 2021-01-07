@@ -15,7 +15,7 @@ namespace MusicStrore2020.Models
         public string Album { get; set; }
         [Display(Name = "Drop Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyy-MM-dd}", ApplyFormatInEditMode = true)] 
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] 
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
         [Display(Name = "Album Cover")] 

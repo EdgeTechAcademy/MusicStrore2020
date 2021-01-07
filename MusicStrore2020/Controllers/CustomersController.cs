@@ -38,8 +38,7 @@ namespace MusicStrore2020.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var customer = await _context.Customers.FirstOrDefaultAsync(m => m.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -170,6 +169,28 @@ namespace MusicStrore2020.Controllers
             _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Recommendations(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var customer = _context.Customers.SingleOrDefault(m => m.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            List<Song> allSongs = _context.Songs.ToList();
+            //  how would you only return songs with a high ranking
+            List<Song> songs = allSongs.FindAll(s => s.Genre == customer.FavoriteGenre);
+            ViewBag.Customer = customer;
+            ViewBag.Me = "This is my name - Edge Tech Academy";
+            ViewBag.time = new DateTime();
+            return View(songs);
         }
 
         private bool CustomerExists(int id)

@@ -185,6 +185,12 @@ namespace MusicStrore2020.Controllers
             return View("ListSongs", shortList);
         }
 
+        // GET: Songs/LoadSongs
+        public IActionResult LoadSongs()
+        {
+            return View();
+        }
+
         // POST: Songs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -238,33 +244,25 @@ namespace MusicStrore2020.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-        // GET: Songs/Search?searchFor=The Eagles
-        //  https://localhost:44366/songs/GetList?searchFor=ABCDEF
-        public IActionResult GetList(string searchFor)
+        // GET: Songs/GetGenre?searchFor=classic
+        //  https://localhost:44366/songs/GetGenre?genre=classic
+        public IActionResult GetGenre(string genre)
         {
             List<Song> allSongs = _context.Songs.ToList();
-            List<string> albums = new List<string>();
 
-            foreach (var song in allSongs)
-            {
-                //  find all album titles that match searchFor
-                if (song.Album.Contains(searchFor))
-                {
-                    albums.Add(song.Album);
-                }
-                //  add the song album name to the albums list
-            }
+            var albums = (from s in allSongs
+                          orderby s.Album
+                          where s.Genre.Contains(genre, StringComparison.OrdinalIgnoreCase)
+                          select s.Album)
+                          .Distinct()
+                          .ToList();
 
-            //  if a unique set of names is required convert from a List to a HashSet
-            HashSet<string> unique = new HashSet<string>(albums);
-            //albums = new List<string>(unique);
-            //  make this list alphabetical
-            albums.Sort();
+            ViewBag.Genre = genre;
             return View("ListAlbums", albums);
         }
 
         // GET: Songs/Search?searchFor=The Eagles
-        //  https://localhost:44366/songs/search?searchfor=boys&field=artistll&searchfor2=rock&field2=genre
+        //  https://localhost:44366/songs/search?searchFor1=boys&field1=artist&searchfor2=rock&field2=genre
         public IActionResult Search(string searchFor1, string field1, string searchFor2, string field2)
         {
             if (searchFor1 == null)
@@ -286,13 +284,15 @@ namespace MusicStrore2020.Controllers
         {
             List<Song> songs;
 
+            if (field == null) return someSongs;
+
             switch (field.ToLower())
             {
-                case "genre": songs = someSongs.FindAll(s => s.Genre.ToUpper().Contains(searchFor.ToUpper())); break;
-                case "artist": songs = someSongs.FindAll(s => s.Artist.ToUpper().Contains(searchFor.ToUpper())); break;
-                case "album": songs = someSongs.FindAll(s => s.Album.ToUpper().Contains(searchFor.ToUpper())); break;
-                case "date": songs = someSongs.FindAll(s => s.ReleaseDate.CompareTo(DateTime.Parse(searchFor)) >= 0); break;
-                default: songs = someSongs; break;
+                case "genre":   songs = someSongs.FindAll(s => s.Genre.ToUpper().Contains(searchFor.ToUpper()));        break;
+                case "artist":  songs = someSongs.FindAll(s => s.Artist.ToUpper().Contains(searchFor.ToUpper()));       break;
+                case "album":   songs = someSongs.FindAll(s => s.Album.ToUpper().Contains(searchFor.ToUpper()));        break;
+                case "date":    songs = someSongs.FindAll(s => s.ReleaseDate.CompareTo(DateTime.Parse(searchFor)) >= 0); break;
+                default:        songs = someSongs; break;
             }
             return songs;
         }
