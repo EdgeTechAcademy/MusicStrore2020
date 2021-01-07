@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MusicStrore2020.Data;
-using MusicStrore2020.Models;
+using MusicStore.Data;
+using MusicStore.Models;
 
-namespace MusicStrore2020.Controllers
+namespace MusicStore.Controllers
 {
     public class CustomersController : Controller
     {

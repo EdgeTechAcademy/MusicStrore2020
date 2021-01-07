@@ -3,14 +3,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using MusicStrore2020.Data;
-using MusicStrore2020.Models;
+using MusicStore.Data;
+using MusicStore.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections.Generic;
 using System;
 
-namespace MusicStrore2020.Controllers
+namespace MusicStore.Controllers
 {
     public class SongsController : Controller
     {

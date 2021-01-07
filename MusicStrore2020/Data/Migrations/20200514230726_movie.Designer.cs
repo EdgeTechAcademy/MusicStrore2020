@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MusicStrore2020.Data;
+using MusicStore.Data;
 
-namespace MusicStrore2020.Data.Migrations
+namespace MusicStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200514230726_movie")]
@@ -221,7 +221,7 @@ namespace MusicStrore2020.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("MusicStrore2020.Models.Movie", b =>
+            modelBuilder.Entity("MusicStore.Models.Movie", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()

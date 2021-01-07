@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MusicStrore2020.Data.Migrations
+namespace MusicStore.Data.Migrations
 {
     public partial class email : Migration
     {

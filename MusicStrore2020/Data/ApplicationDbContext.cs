@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MusicStrore2020.Models;
+using MusicStore.Models;
 
-namespace MusicStrore2020.Data
+namespace MusicStore.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -13,8 +13,8 @@ namespace MusicStrore2020.Data
             : base(options)
         {
         }
-        public DbSet<MusicStrore2020.Models.Movie> Movies { get; set; }
-        public DbSet<MusicStrore2020.Models.Song> Songs { get; set; }
-        public DbSet<MusicStrore2020.Models.Customer> Customers { get; set; }
+        public DbSet<MusicStore.Models.Movie> Movies { get; set; }
+        public DbSet<MusicStore.Models.Song> Songs { get; set; }
+        public DbSet<MusicStore.Models.Customer> Customers { get; set; }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStrore2020", "MusicStrore2020\MusicStrore2020.csproj", "{B4E5119C-2DFF-43E9-9B19-2267196530FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicStore", "MusicStrore2020\MusicStore.csproj", "{B4E5119C-2DFF-43E9-9B19-2267196530FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

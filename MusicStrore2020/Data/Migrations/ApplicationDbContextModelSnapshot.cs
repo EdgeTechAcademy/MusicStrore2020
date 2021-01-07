@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MusicStrore2020.Data;
+using MusicStore.Data;
 
-namespace MusicStrore2020.Data.Migrations
+namespace MusicStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -219,7 +219,7 @@ namespace MusicStrore2020.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("MusicStrore2020.Models.Customer", b =>
+            modelBuilder.Entity("MusicStore.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -249,7 +249,7 @@ namespace MusicStrore2020.Data.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("MusicStrore2020.Models.Movie", b =>
+            modelBuilder.Entity("MusicStore.Models.Movie", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -273,7 +273,7 @@ namespace MusicStrore2020.Data.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("MusicStrore2020.Models.Song", b =>
+            modelBuilder.Entity("MusicStore.Models.Song", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

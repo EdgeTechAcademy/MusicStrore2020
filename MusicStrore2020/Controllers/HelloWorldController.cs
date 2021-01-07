@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MusicStrore2020.Controllers
+namespace MusicStore.Controllers
 {
     public class HelloWorldController : Controller
     {

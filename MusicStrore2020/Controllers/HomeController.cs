@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MusicStrore2020.Data;
-using MusicStrore2020.Models;
+using MusicStore.Data;
+using MusicStore.Models;
 
-namespace MusicStrore2020.Controllers
+namespace MusicStore.Controllers
 {
     public class HomeController : Controller
     {
